@@ -1,29 +1,19 @@
 # -*- coding: utf-8 -*-
-import traceback
-import logging
-from selenium.common import NoSuchElementException, TimeoutException, WebDriverException
 from selenium.webdriver.chrome.options import Options
 from seleniumwire import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-from urllib.parse import urljoin
 
 from dotenv import load_dotenv
 
 from random import randint
 import time
 import os
-import logging
-import requests
 
 
 load_dotenv()
 
-
-
-SEARCH_BTN = '//*[@id="frmQuickSearch"]/div[3]/div[2]/button'
-INPUT_OGRN = '//div[@class = "u3-field__input"]/input'
 DIV_BTN = '/html/body/main/section[2]/div/div/div[2]/div/div/div[2]/div[2]/div[1]/div'
 
 proxy_username = os.getenv('PROXY_USERNAME')
@@ -49,8 +39,6 @@ def create_browser():
     chrome_options.add_argument('--headless')
     browser = webdriver.Chrome(seleniumwire_options=proxy_options, options=chrome_options)
     browser.set_window_size(1280, 11000)
-    #browser.get('chrome://settings/')
-    #browser.execute_script('chrome.settingsPrivate.setDefaultZoom(0.25);')
 
     return browser
 
@@ -77,7 +65,6 @@ def get_info_ogrn(browser, wait, ogrn):
     data = {}
     try:
         browser.get(f'https://pb.nalog.ru/search.html#t=1718002842355&mode=search-all&queryAll={ogrn}&page=1&pageSize=10')
-        enter_ogrn(browser, ogrn, INPUT_OGRN)
         to_click(DIV_BTN, browser)
         wait.until(
             EC.visibility_of_all_elements_located(

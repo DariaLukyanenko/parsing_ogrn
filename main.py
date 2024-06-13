@@ -4,8 +4,10 @@ from parse_ogrn_nalog import scrape_ogrn_info
 
 app = FastAPI()
 
+
 class OGRNRequest(BaseModel):
     ogrn: str
+
 
 @app.post("/get-info")
 def get_info(request: OGRNRequest):
