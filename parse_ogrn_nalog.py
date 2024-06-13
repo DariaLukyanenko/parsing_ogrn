@@ -21,7 +21,6 @@ import requests
 load_dotenv()
 
 
-URL = 'https://pb.nalog.ru'
 
 SEARCH_BTN = '//*[@id="frmQuickSearch"]/div[3]/div[2]/button'
 INPUT_OGRN = '//div[@class = "u3-field__input"]/input'
@@ -77,12 +76,8 @@ def to_click(btn, browser):
 def get_info_ogrn(browser, wait, ogrn):
     data = {}
     try:
-        browser.get(URL)
+        browser.get(f'https://pb.nalog.ru/search.html#t=1718002842355&mode=search-all&queryAll={ogrn}&page=1&pageSize=10')
         enter_ogrn(browser, ogrn, INPUT_OGRN)
-        to_click(SEARCH_BTN, browser)
-        wait.until(
-            EC.visibility_of_all_elements_located(
-                (By.XPATH, '//*[@id="resultul"]/div[2]/div[1]/div')))
         to_click(DIV_BTN, browser)
         wait.until(
             EC.visibility_of_all_elements_located(
