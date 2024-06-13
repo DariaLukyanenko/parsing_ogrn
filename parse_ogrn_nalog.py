@@ -46,13 +46,6 @@ def create_browser():
 def get_wait(browser):
     return WebDriverWait(browser, 60)
 
-def enter_ogrn(browser, OGRN, INPUT_OGRN):
-    input_field = browser.find_element(By.XPATH, INPUT_OGRN)
-
-    input_field.clear()
-
-    input_field.send_keys(OGRN)
-
 
 def to_click(btn, browser):
     find_button = browser.find_element(By.XPATH, btn)
